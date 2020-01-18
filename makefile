@@ -10,7 +10,7 @@ OPT = -std=c++1z $(INCLUDE)
 INCLUDE = -I./include
 LIB_DIR = -L./lib
 
-TEST_DIR = test
+TEST_DIR = _test
 TEST_SRC = test.cpp
 TEST_BIN = test.exe
 TEST_OPT = $(OPT) $(LIB_DIR) -lgenetic
