@@ -13,7 +13,6 @@ public:
 	genome() noexcept;
 	double eval(std::function<double(std::bitset<_Len>)> env) const;
 	void reset() noexcept;
-	genome<_Len> copy() const noexcept;
 	constexpr size_t length() const noexcept;
 private:
 	std::bitset<_Len> dna;
@@ -36,13 +35,6 @@ inline void genome<_Len>::reset() noexcept {
 		dna <<= 8;
 		dna |= r;
 	}
-}
-
-template <size_t _Len>
-inline genome<_Len> genome<_Len>::copy() const noexcept {
-	genome<_Len> g;
-	g.dna = dna;
-	return dna;
 }
 
 template <size_t _Len>
