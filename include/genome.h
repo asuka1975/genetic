@@ -11,9 +11,11 @@ template <size_t _Len>
 class genome {
 public:
 	genome() noexcept;
-	genome(cosnt std::bitset<_Len>& dna) noexcept;
-	double eval(std::function<double(std::bitset<_Len>)> env) const;
-	std::bitset<_Len> apply(std::function<std::bitset<_Len>(std::bitset<_Len>)> op) const;
+	explicit genome(const std::bitset<_Len>& dna) noexcept;
+	template <class _TEvaluator>
+	double eval(_TEvaluator env) const;
+	template <class _TOperator>
+	std::bitset<_Len> apply(_TOperator op) const;
 	void reset() noexcept;
 	constexpr size_t length() const noexcept;
 private:
@@ -29,12 +31,14 @@ template <size_t _Len>
 inline genome<_Len>::genome(const std::bitset<_Len>& dna) noexcept : dna(dna) { }
 
 template <size_t _Len>
-inline double genome<_Len>::eval(std::function<double(std::bitset<_Len>)> env) const {
+template <class _TEvaluator>
+inline double genome<_Len>::eval(_TEvaluator env) const {
 	return env(dna);
 }
 
 template <size_t _Len>
-inline std::bitset<_Len> genome<_Len>::apply(std::function<std::bitset<_Len>(std::bitset<_Len>)> op) const {
+template <class _TOperator>
+inline std::bitset<_Len> genome<_Len>::apply(_TOperator op) const {
 	return op(dna);
 }
 
